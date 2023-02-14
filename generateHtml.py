@@ -51,7 +51,7 @@ def generateSpansForHypSeq(sequence) -> str:
     utt_div_Start = f'<div class="utterance" index="{utt_id}" speakerID="{speakerID}">\n'
     utt_div_End = '</div>\n'
     spans=[]
-    speakerSpan = f'<span class="ref-speaker">{speakerID}: </span>'
+    speakerSpan = f'<span class="hyp-speaker">{speakerID}: </span>'
     spans.append(speakerSpan)
     for token in utt:
       index = token['index']
@@ -75,9 +75,11 @@ def getAllTokens(sequences):
 
 def htmlElements(refstr, hypstr):
   ref = '<div class = "ref-container" id="ref">\n'+\
+        '<div class= "ref-header"> Reference </div>' +\
     '<div class = "ref-text">' +\
       refstr + '</div>\n </div>\n'
   hyp = '<div class = "hyp-container" id="hyp">\n'+\
+    '<div class= "hyp-header"> Hypothesis </div>' + \
     '<div class = "hyp-text">' +\
       hypstr + '</div>\n </div>\n'
       
@@ -90,6 +92,12 @@ def htmlElements(refstr, hypstr):
     local_script(Path(__file__).parent / "src" / "transcriptvis.js"),
   ]
   
+def getHtmlString(refstr, hypstr):
+  resultStr = ""
+  for element in htmlElements(refstr, hypstr):
+    resultStr += element
+  return resultStr
+
 def group_tokens_into_utterances(tokens) -> list:
     utterances = []
     current_utterance = []

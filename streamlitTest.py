@@ -2,12 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from pathlib import Path
-
-
-st.set_page_config(layout="wide")
-st.title('Transcripts eval')
-
-
+from generateHtml import readData, generateSpansFromMultiSeq, generateSpansForHypSeq, getHtmlString
+import json
 # DATE_COLUMN = 'date/time'
 # DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
 #             'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
@@ -23,8 +19,6 @@ st.title('Transcripts eval')
 # col1, col2 = st.columns((3, 3))
 # filename = col1.selectbox(label="File:", options=["1","2"])
 
-with st.sidebar:
-  add_selectbox = st.sidebar.selectbox("Is this multi-speaker conversation?", ("yes", "no"))
 
 # data_load_state = st.text('Loading data...')
 # data = load_data(10000)
@@ -47,9 +41,34 @@ with st.sidebar:
 #   st.map(filtered_data)
 
 # with col1:
-with st.container():
-  path = Path(__file__).parent / "testTokens.html"
-  # st.components.v1.html(str(path))
-  file = open("testTokens.html")
-  st.components.v1.html(file.read(),height=720, scrolling=True)
-  file.close()
+
+metric_options = ['DER', 'WDER', 'WER', 'TDER', 'F1']
+
+
+if __name__ == "__main__":
+  st.set_page_config(layout="wide")
+  with st.sidebar:
+    uploaded_file = st.file_uploader("Upload the alignment result")
+      
+    add_selectbox = st.sidebar.selectbox("Is this multi-speaker conversation?", ("yes", "no"))
+    selected_metrics = st.sidebar.multiselect(
+      "Evaluation Metric",
+      metric_options
+    )
+    err_highlight = st.sidebar.checkbox("Highlight errors")
+  
+  if uploaded_file is not None:
+    bytes_data = uploaded_file.getvalue()
+    data = json.loads(bytes_data)
+    refSequences = data['ref']['sequences']
+    hypSequence = data['hyp']['sequence']
+    refstr = generateSpansFromMultiSeq(refSequences)
+    hypstr = generateSpansForHypSeq(hypSequence)
+    htmlStr = getHtmlString(refstr,hypstr)
+    with st.container():
+      # path = Path(__file__).parent / "testTokens.html"
+      # # st.components.v1.html(str(path))
+      # file = open("testTokens.html")
+      # st.components.v1.html(file.read(),height=720, scrolling=True)
+      # file.close()
+      st.components.v1.html(htmlStr,height=720, scrolling=True)

@@ -7,7 +7,7 @@
                     "index": 0,
                     "aligned-index": 0,
                     "speakerID": "C",
-                    "aligned-type": "mismatch"
+                    "aligned-type": "fully match"
                 },
                 {
                     "token": "much",
@@ -313,10 +313,10 @@
     "hyp": {
         "sequence": [
             {
-                "token": "\ufeffhow",
+                "token": "how",
                 "index": 0,
                 "speakerID": "0",
-                "aligned-type": "mismatch"
+                "aligned-type": "fully match"
             },
             {
                 "token": "much",

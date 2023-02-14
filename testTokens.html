@@ -20,17 +20,31 @@
   padding: 10px 20px;
   float: left;
   width: 50%;
-  padding-right: 0px;
+  padding-right: 10px;
+}
+
+.ref-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: large;
+  color: black;
+}
+
+.hyp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: large;
+  color: black;
 }
 
 .hyp-container {
-  padding: 0px 20px;
+  padding: 10px 20px;
   float: left;
   width: 50%;
-  padding-top: 8px;
+  /* padding-top: 8px;   */
 }
-
-
 
 .doc {
     display: flex;
@@ -57,11 +71,21 @@
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
   flex: 1;
-  border: 1px solid #e9e9e9
+  border: 1px solid #e9e9e9;
+  height: 610px;
 }
 
 .utterance {
-  padding-bottom: 4px;
+  padding-bottom: 15px;
+  /* text-underline-offset: 1; */
+}
+
+.ref-speaker{
+  padding-right: 5px;
+}
+
+.hyp-speaker{
+  padding-right: 5px;
 }
 
 /* .ref-scroll {
@@ -82,8 +106,8 @@ span[aligned-type="mismatch"] {
   text-decoration: line-through;
 }</style> <body>
 <div class="doc-container"><div class = "hyp-container" id="hyp">
-<div class = "hyp-text"><div class="utterance" index="0" speakerID="0">
-<span class="ref-speaker">0: </span><span class="hyp" index="0" aligned-type="mismatch" speakerID="0">﻿how</span>
+<div class= "hyp-header"> Hypothesis </div><div class = "hyp-text"><div class="utterance" index="0" speakerID="0">
+<span class="hyp-speaker">0: </span><span class="hyp" index="0" aligned-type="fully match" speakerID="0">how</span>
 <span class="hyp" index="1" aligned-type="fully match" speakerID="0">much</span>
 <span class="hyp" index="2" aligned-type="fully match" speakerID="0">how</span>
 <span class="hyp" index="3" aligned-type="fully match" speakerID="0">easy</span>
@@ -102,10 +126,10 @@ span[aligned-type="mismatch"] {
 <span class="hyp" index="16" aligned-type="mismatch" speakerID="0">okay</span>
 </div>
 <div class="utterance" index="1" speakerID="-">
-<span class="ref-speaker">-: </span><span class="hyp" index="17" aligned-type="gap" speakerID="-">-</span>
+<span class="hyp-speaker">-: </span><span class="hyp" index="17" aligned-type="gap" speakerID="-">-</span>
 </div>
 <div class="utterance" index="2" speakerID="0">
-<span class="ref-speaker">0: </span><span class="hyp" index="18" aligned-type="fully match" speakerID="0">So</span>
+<span class="hyp-speaker">0: </span><span class="hyp" index="18" aligned-type="fully match" speakerID="0">So</span>
 <span class="hyp" index="19" aligned-type="fully match" speakerID="0">this</span>
 <span class="hyp" index="20" aligned-type="fully match" speakerID="0">Morgan</span>
 <span class="hyp" index="21" aligned-type="fully match" speakerID="0">wants</span>
@@ -115,13 +139,13 @@ span[aligned-type="mismatch"] {
 <span class="hyp" index="25" aligned-type="fully match" speakerID="0">hard</span>
 </div>
 <div class="utterance" index="3" speakerID="1">
-<span class="ref-speaker">1: </span><span class="hyp" index="26" aligned-type="mismatch" speakerID="1">Well</span>
+<span class="hyp-speaker">1: </span><span class="hyp" index="26" aligned-type="mismatch" speakerID="1">Well</span>
 </div>
 <div class="utterance" index="4" speakerID="-">
-<span class="ref-speaker">-: </span><span class="hyp" index="27" aligned-type="gap" speakerID="-">-</span>
+<span class="hyp-speaker">-: </span><span class="hyp" index="27" aligned-type="gap" speakerID="-">-</span>
 </div>
 <div class="utterance" index="5" speakerID="1">
-<span class="ref-speaker">1: </span><span class="hyp" index="28" aligned-type="fully match" speakerID="1">uh</span>
+<span class="hyp-speaker">1: </span><span class="hyp" index="28" aligned-type="fully match" speakerID="1">uh</span>
 <span class="hyp" index="29" aligned-type="mismatch" speakerID="1">the</span>
 <span class="hyp" index="30" aligned-type="fully match" speakerID="1">counter</span>
 <span class="hyp" index="31" aligned-type="fully match" speakerID="1">is</span>
@@ -129,14 +153,14 @@ span[aligned-type="mismatch"] {
 <span class="hyp" index="33" aligned-type="fully match" speakerID="1">moving</span>
 </div>
 <div class="utterance" index="6" speakerID="2">
-<span class="ref-speaker">2: </span><span class="hyp" index="34" aligned-type="partially match" speakerID="2">Again</span>
+<span class="hyp-speaker">2: </span><span class="hyp" index="34" aligned-type="partially match" speakerID="2">Again</span>
 <span class="hyp" index="35" aligned-type="fully match" speakerID="2">it</span>
 <span class="hyp" index="36" aligned-type="partially match" speakerID="2">it</span>
 <span class="hyp" index="37" aligned-type="fully match" speakerID="2">doesnt</span>
 <span class="hyp" index="38" aligned-type="fully match" speakerID="2">it</span>
 </div>
 <div class="utterance" index="7" speakerID="1">
-<span class="ref-speaker">1: </span><span class="hyp" index="39" aligned-type="partially match" speakerID="1">Doesnt</span>
+<span class="hyp-speaker">1: </span><span class="hyp" index="39" aligned-type="partially match" speakerID="1">Doesnt</span>
 <span class="hyp" index="40" aligned-type="fully match" speakerID="1">like</span>
 <span class="hyp" index="41" aligned-type="fully match" speakerID="1">me</span>
 <span class="hyp" index="42" aligned-type="fully match" speakerID="1">but</span>
@@ -144,8 +168,8 @@ span[aligned-type="mismatch"] {
 </div>
  </div>
 <div class = "ref-container" id="ref">
-<div class = "ref-text"><div class="utterance" index="0" speakerID="C">
-<span class="ref-speaker">C: </span><span class="ref" index="0" aligned-index="0" aligned-type="mismatch" speakerID="C">how</span>
+<div class= "ref-header"> Reference </div><div class = "ref-text"><div class="utterance" index="0" speakerID="C">
+<span class="ref-speaker">C: </span><span class="ref" index="0" aligned-index="0" aligned-type="fully match" speakerID="C">how</span>
 <span class="ref" index="1" aligned-index="1" aligned-type="fully match" speakerID="C">much</span>
 <span class="ref" index="2" aligned-index="2" aligned-type="fully match" speakerID="C">how</span>
 <span class="ref" index="3" aligned-index="3" aligned-type="fully match" speakerID="C">easy</span>
