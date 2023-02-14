@@ -4,6 +4,7 @@ import numpy as np
 from pathlib import Path
 from generateHtml import readData, generateSpansFromMultiSeq, generateSpansForHypSeq, getHtmlString
 import json
+from eval import Eval
 # DATE_COLUMN = 'date/time'
 # DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
 #             'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
@@ -44,6 +45,13 @@ import json
 
 metric_options = ['DER', 'WDER', 'WER', 'TDER', 'F1']
 
+def prepareDataForEval(refSequences, hypSequence):
+  refAlignSequences = []
+  for seq in refSequences:
+    refAlignSequences.append([token['aligned-index'] for token in seq])
+  
+  hypSpeakerSequence = [token['speakerID'] for token in hypSequence]
+  return refAlignSequences, hypSpeakerSequence
 
 if __name__ == "__main__":
   st.set_page_config(layout="wide")
@@ -64,6 +72,9 @@ if __name__ == "__main__":
     hypSequence = data['hyp']['sequence']
     refstr = generateSpansFromMultiSeq(refSequences)
     hypstr = generateSpansForHypSeq(hypSequence)
+    eval = Eval(hypTokens=hypSequence, refSequences=refSequences)
+    wder = eval.WDER()
+    st.metric(label="WDER", value="{:.2f}".format(wder))
     htmlStr = getHtmlString(refstr,hypstr)
     with st.container():
       # path = Path(__file__).parent / "testTokens.html"
