@@ -70,12 +70,31 @@ class Eval():
           aligned_num += 1
           hypSpk = self.hypTokens[aligned_index]['speakerID']
           if self.speakerMapping[refSpk] != hypSpk:
+            self.hypTokens[aligned_index]['WDER_err'] = True # record WDER error
+            token['WDER_err'] = True
             error_count += 1
 
     return error_count/aligned_num
     
   def WER(self):
-    pass
+    # d, i, sub
+    deletion, insertion, substitution = 0,0,0
+    for token in self.hypTokens:
+      if token['token'] != '-' and token['aligned-type'] == 'gap':
+        insertion += 1
+        token['WER_err'] = 'i'
+        
+    for seq in self.refSequences:
+      for token in seq:
+        if token['aligned-index'] == -1:
+          deletion += 1
+          token['WER_err'] = 'd'
+        if token['aligned-type'] == 'partially match' or token['aligned-type'] == 'mismatch':
+          substitution += 1
+          token['WER_err'] = 's'
+    all_token_num = sum([len(seq) for seq in self.refSequences])
+    return (deletion+insertion+substitution)/all_token_num
+    
 
 
 

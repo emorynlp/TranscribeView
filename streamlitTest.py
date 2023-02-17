@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from pathlib import Path
-from generateHtml import readData, generateSpansFromMultiSeq, generateSpansForHypSeq, getHtmlString
+from generateHtml import readData, generateSpansFromMultiSeq, generateSpansForHypSeq, getHtmlString, visComponents
 import json
 from eval import Eval
 # DATE_COLUMN = 'date/time'
@@ -53,8 +53,29 @@ def prepareDataForEval(refSequences, hypSequence):
   hypSpeakerSequence = [token['speakerID'] for token in hypSequence]
   return refAlignSequences, hypSpeakerSequence
 
+def displayMetric(selected_metrics, data):
+  refSequences = data['ref']['sequences']
+  hypSequence = data['hyp']['sequence']
+  eval = Eval(hypTokens=hypSequence, refSequences=refSequences)
+  if selected_metrics:
+    for option in selected_metrics:
+      if option == "WDER":
+        wder = eval.WDER()
+        st.metric(label="WDER", value="{:.2f}".format(wder))
+      elif option == "WER":
+        wer = eval.WER()
+        st.metric(label="WER", value="{:.2f}".format(wer))
+  
+
+
+
 if __name__ == "__main__":
   st.set_page_config(layout="wide")
+  
+  # ==============
+
+  
+  
   with st.sidebar:
     uploaded_file = st.file_uploader("Upload the alignment result")
       
@@ -73,9 +94,12 @@ if __name__ == "__main__":
     refstr = generateSpansFromMultiSeq(refSequences)
     hypstr = generateSpansForHypSeq(hypSequence)
     eval = Eval(hypTokens=hypSequence, refSequences=refSequences)
-    wder = eval.WDER()
-    st.metric(label="WDER", value="{:.2f}".format(wder))
-    htmlStr = getHtmlString(refstr,hypstr)
+    speakerMapping = eval.speakerMapping
+    # st.write(speakerMapping)
+    # displayMetric(selected_metrics, data)
+    # htmlStr = getHtmlString(refstr,hypstr)
+    components = visComponents(data, selected_metrics)
+    htmlStr = components.getHtmlStr()
     with st.container():
       # path = Path(__file__).parent / "testTokens.html"
       # # st.components.v1.html(str(path))

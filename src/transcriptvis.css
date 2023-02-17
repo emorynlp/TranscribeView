@@ -88,6 +88,10 @@ body {
   padding-right: 5px;
 }
 
+div[speakerID="-"] {
+  display: none;
+}
+
 /* .ref-scroll {
   height: 610px;
 }
@@ -96,12 +100,56 @@ body {
   height: 610px;
 } */
 
-span[aligned-type="gap"] {
+ul.metrics {
+  display: flex;
+  align-items: flex-end;
+  list-style: none;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 10px;
+  margin: 0px 0px 10px 0px;
+  /* padding-left: 10px; */
+}
+
+.metric-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.metric-container:hover {
+  background-color: #F0F0F0;
+}
+
+.metric-value {
+  font-size: 28px;
+  font-weight: 500;
+  color: #333333;
+}
+
+.metric-name {
+  font-size: 16px;
+  font-weight: 400;
+  color: #888888;
+  padding-right: 5px;
+}
+
+/* span[aligned-type="gap"] {
   color: brown;
   text-decoration: line-through;
+}
+
+span[wder_err="error"] {
+  color: green;
 }
 
 span[aligned-type="mismatch"] {
   color: brown;
   text-decoration: line-through;
-}
+} */

@@ -88,6 +88,10 @@
   padding-right: 5px;
 }
 
+div[speakerID="-"] {
+  display: none;
+}
+
 /* .ref-scroll {
   height: 610px;
 }
@@ -96,132 +100,176 @@
   height: 610px;
 } */
 
-span[aligned-type="gap"] {
+ul.metrics {
+  display: flex;
+  align-items: flex-end;
+  list-style: none;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 10px;
+  margin: 0px 0px 10px 0px;
+  /* padding-left: 10px; */
+}
+
+.metric-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.metric-container:hover {
+  background-color: #F0F0F0;
+}
+
+.metric-value {
+  font-size: 28px;
+  font-weight: 500;
+  color: #333333;
+}
+
+.metric-name {
+  font-size: 16px;
+  font-weight: 400;
+  color: #888888;
+  padding-right: 5px;
+}
+
+/* span[aligned-type="gap"] {
   color: brown;
   text-decoration: line-through;
+}
+
+span[wder_err="error"] {
+  color: green;
 }
 
 span[aligned-type="mismatch"] {
   color: brown;
   text-decoration: line-through;
-}</style> <body>
-<div class="doc-container"><div class = "hyp-container" id="hyp">
+} */</style> <body>
+<ul class="metrics">    <li class="metric-title">Metrics:</li><li id="WER" class="selected metric">                    <div class="metric-container WER">                    <div class="metric-name">WER </div>                   <div class="metric-value">0.21</div>            </div>          </li><li id="WDER" class="selected metric">            <div class="metric-container WDER">            <div class="metric-name">WDER </div>              <div class="metric-value">0.22</div>            </div>          </li></ul><div class="doc-container"><div class = "hyp-container" id="hyp">
 <div class= "hyp-header"> Hypothesis </div><div class = "hyp-text"><div class="utterance" index="0" speakerID="0">
-<span class="hyp-speaker">0: </span><span class="hyp" index="0" aligned-type="fully match" speakerID="0">how</span>
-<span class="hyp" index="1" aligned-type="fully match" speakerID="0">much</span>
-<span class="hyp" index="2" aligned-type="fully match" speakerID="0">how</span>
-<span class="hyp" index="3" aligned-type="fully match" speakerID="0">easy</span>
-<span class="hyp" index="4" aligned-type="fully match" speakerID="0">we</span>
-<span class="hyp" index="5" aligned-type="fully match" speakerID="0">want</span>
-<span class="hyp" index="6" aligned-type="fully match" speakerID="0">to</span>
-<span class="hyp" index="7" aligned-type="fully match" speakerID="0">make</span>
-<span class="hyp" index="8" aligned-type="fully match" speakerID="0">it</span>
-<span class="hyp" index="9" aligned-type="fully match" speakerID="0">for</span>
-<span class="hyp" index="10" aligned-type="fully match" speakerID="0">people</span>
-<span class="hyp" index="11" aligned-type="fully match" speakerID="0">to</span>
-<span class="hyp" index="12" aligned-type="fully match" speakerID="0">bleep</span>
-<span class="hyp" index="13" aligned-type="fully match" speakerID="0">things</span>
-<span class="hyp" index="14" aligned-type="fully match" speakerID="0">out</span>
-<span class="hyp" index="15" aligned-type="partially match" speakerID="0">So</span>
-<span class="hyp" index="16" aligned-type="mismatch" speakerID="0">okay</span>
+<span class="hyp-speaker">0: </span><span class="hyp" index="0" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          how</span>
+<span class="hyp" index="1" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          much</span>
+<span class="hyp" index="2" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          how</span>
+<span class="hyp" index="3" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          easy</span>
+<span class="hyp" index="4" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          we</span>
+<span class="hyp" index="5" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          want</span>
+<span class="hyp" index="6" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          to</span>
+<span class="hyp" index="7" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          make</span>
+<span class="hyp" index="8" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          it</span>
+<span class="hyp" index="9" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          for</span>
+<span class="hyp" index="10" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          people</span>
+<span class="hyp" index="11" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          to</span>
+<span class="hyp" index="12" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          bleep</span>
+<span class="hyp" index="13" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          things</span>
+<span class="hyp" index="14" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          out</span>
+<span class="hyp" index="15" aligned-type="partially match"        speakerID="0" wder_err="not_error" wer_err="not_error">          So</span>
+<span class="hyp" index="16" aligned-type="mismatch"        speakerID="0" wder_err="error" wer_err="not_error">          okay</span>
 </div>
 <div class="utterance" index="1" speakerID="-">
-<span class="hyp-speaker">-: </span><span class="hyp" index="17" aligned-type="gap" speakerID="-">-</span>
+<span class="hyp-speaker">-: </span><span class="hyp" index="17" aligned-type="gap"        speakerID="-" wder_err="not_error" wer_err="not_error">          -</span>
 </div>
 <div class="utterance" index="2" speakerID="0">
-<span class="hyp-speaker">0: </span><span class="hyp" index="18" aligned-type="fully match" speakerID="0">So</span>
-<span class="hyp" index="19" aligned-type="fully match" speakerID="0">this</span>
-<span class="hyp" index="20" aligned-type="fully match" speakerID="0">Morgan</span>
-<span class="hyp" index="21" aligned-type="fully match" speakerID="0">wants</span>
-<span class="hyp" index="22" aligned-type="fully match" speakerID="0">to</span>
-<span class="hyp" index="23" aligned-type="fully match" speakerID="0">make</span>
-<span class="hyp" index="24" aligned-type="fully match" speakerID="0">it</span>
-<span class="hyp" index="25" aligned-type="fully match" speakerID="0">hard</span>
+<span class="hyp-speaker">0: </span><span class="hyp" index="18" aligned-type="fully match"        speakerID="0" wder_err="error" wer_err="not_error">          So</span>
+<span class="hyp" index="19" aligned-type="fully match"        speakerID="0" wder_err="error" wer_err="not_error">          this</span>
+<span class="hyp" index="20" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          Morgan</span>
+<span class="hyp" index="21" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          wants</span>
+<span class="hyp" index="22" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          to</span>
+<span class="hyp" index="23" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          make</span>
+<span class="hyp" index="24" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          it</span>
+<span class="hyp" index="25" aligned-type="fully match"        speakerID="0" wder_err="not_error" wer_err="not_error">          hard</span>
 </div>
 <div class="utterance" index="3" speakerID="1">
-<span class="hyp-speaker">1: </span><span class="hyp" index="26" aligned-type="mismatch" speakerID="1">Well</span>
+<span class="hyp-speaker">1: </span><span class="hyp" index="26" aligned-type="mismatch"        speakerID="1" wder_err="not_error" wer_err="not_error">          Well</span>
 </div>
 <div class="utterance" index="4" speakerID="-">
-<span class="hyp-speaker">-: </span><span class="hyp" index="27" aligned-type="gap" speakerID="-">-</span>
+<span class="hyp-speaker">-: </span><span class="hyp" index="27" aligned-type="gap"        speakerID="-" wder_err="not_error" wer_err="not_error">          -</span>
 </div>
 <div class="utterance" index="5" speakerID="1">
-<span class="hyp-speaker">1: </span><span class="hyp" index="28" aligned-type="fully match" speakerID="1">uh</span>
-<span class="hyp" index="29" aligned-type="mismatch" speakerID="1">the</span>
-<span class="hyp" index="30" aligned-type="fully match" speakerID="1">counter</span>
-<span class="hyp" index="31" aligned-type="fully match" speakerID="1">is</span>
-<span class="hyp" index="32" aligned-type="fully match" speakerID="1">not</span>
-<span class="hyp" index="33" aligned-type="fully match" speakerID="1">moving</span>
+<span class="hyp-speaker">1: </span><span class="hyp" index="28" aligned-type="fully match"        speakerID="1" wder_err="not_error" wer_err="not_error">          uh</span>
+<span class="hyp" index="29" aligned-type="mismatch"        speakerID="1" wder_err="error" wer_err="not_error">          the</span>
+<span class="hyp" index="30" aligned-type="fully match"        speakerID="1" wder_err="not_error" wer_err="not_error">          counter</span>
+<span class="hyp" index="31" aligned-type="fully match"        speakerID="1" wder_err="not_error" wer_err="not_error">          is</span>
+<span class="hyp" index="32" aligned-type="fully match"        speakerID="1" wder_err="not_error" wer_err="not_error">          not</span>
+<span class="hyp" index="33" aligned-type="fully match"        speakerID="1" wder_err="not_error" wer_err="not_error">          moving</span>
 </div>
 <div class="utterance" index="6" speakerID="2">
-<span class="hyp-speaker">2: </span><span class="hyp" index="34" aligned-type="partially match" speakerID="2">Again</span>
-<span class="hyp" index="35" aligned-type="fully match" speakerID="2">it</span>
-<span class="hyp" index="36" aligned-type="partially match" speakerID="2">it</span>
-<span class="hyp" index="37" aligned-type="fully match" speakerID="2">doesnt</span>
-<span class="hyp" index="38" aligned-type="fully match" speakerID="2">it</span>
+<span class="hyp-speaker">2: </span><span class="hyp" index="34" aligned-type="partially match"        speakerID="2" wder_err="error" wer_err="not_error">          Again</span>
+<span class="hyp" index="35" aligned-type="fully match"        speakerID="2" wder_err="error" wer_err="not_error">          it</span>
+<span class="hyp" index="36" aligned-type="partially match"        speakerID="2" wder_err="error" wer_err="not_error">          it</span>
+<span class="hyp" index="37" aligned-type="fully match"        speakerID="2" wder_err="error" wer_err="not_error">          doesnt</span>
+<span class="hyp" index="38" aligned-type="fully match"        speakerID="2" wder_err="not_error" wer_err="not_error">          it</span>
 </div>
 <div class="utterance" index="7" speakerID="1">
-<span class="hyp-speaker">1: </span><span class="hyp" index="39" aligned-type="partially match" speakerID="1">Doesnt</span>
-<span class="hyp" index="40" aligned-type="fully match" speakerID="1">like</span>
-<span class="hyp" index="41" aligned-type="fully match" speakerID="1">me</span>
-<span class="hyp" index="42" aligned-type="fully match" speakerID="1">but</span>
+<span class="hyp-speaker">1: </span><span class="hyp" index="39" aligned-type="partially match"        speakerID="1" wder_err="error" wer_err="not_error">          Doesnt</span>
+<span class="hyp" index="40" aligned-type="fully match"        speakerID="1" wder_err="not_error" wer_err="not_error">          like</span>
+<span class="hyp" index="41" aligned-type="fully match"        speakerID="1" wder_err="not_error" wer_err="not_error">          me</span>
+<span class="hyp" index="42" aligned-type="fully match"        speakerID="1" wder_err="not_error" wer_err="not_error">          but</span>
 </div>
 </div>
  </div>
 <div class = "ref-container" id="ref">
 <div class= "ref-header"> Reference </div><div class = "ref-text"><div class="utterance" index="0" speakerID="C">
-<span class="ref-speaker">C: </span><span class="ref" index="0" aligned-index="0" aligned-type="fully match" speakerID="C">how</span>
-<span class="ref" index="1" aligned-index="1" aligned-type="fully match" speakerID="C">much</span>
-<span class="ref" index="2" aligned-index="2" aligned-type="fully match" speakerID="C">how</span>
-<span class="ref" index="3" aligned-index="3" aligned-type="fully match" speakerID="C">easy</span>
-<span class="ref" index="4" aligned-index="4" aligned-type="fully match" speakerID="C">we</span>
-<span class="ref" index="5" aligned-index="5" aligned-type="fully match" speakerID="C">want</span>
-<span class="ref" index="6" aligned-index="6" aligned-type="fully match" speakerID="C">to</span>
-<span class="ref" index="7" aligned-index="7" aligned-type="fully match" speakerID="C">make</span>
-<span class="ref" index="8" aligned-index="8" aligned-type="fully match" speakerID="C">it</span>
-<span class="ref" index="9" aligned-index="9" aligned-type="fully match" speakerID="C">for</span>
-<span class="ref" index="10" aligned-index="10" aligned-type="fully match" speakerID="C">people</span>
-<span class="ref" index="11" aligned-index="11" aligned-type="fully match" speakerID="C">to</span>
-<span class="ref" index="12" aligned-index="12" aligned-type="fully match" speakerID="C">bleep</span>
-<span class="ref" index="13" aligned-index="13" aligned-type="fully match" speakerID="C">things</span>
-<span class="ref" index="14" aligned-index="14" aligned-type="fully match" speakerID="C">out</span>
-<span class="ref" index="15" aligned-index="15" aligned-type="partially match" speakerID="C">so</span>
+<span class="ref-speaker">C: </span><span class="ref"         index="0"           aligned-index="0"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                how                  </span>
+<span class="ref"         index="1"           aligned-index="1"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                much                  </span>
+<span class="ref"         index="2"           aligned-index="2"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                how                  </span>
+<span class="ref"         index="3"           aligned-index="3"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                easy                  </span>
+<span class="ref"         index="4"           aligned-index="4"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                we                  </span>
+<span class="ref"         index="5"           aligned-index="5"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                want                  </span>
+<span class="ref"         index="6"           aligned-index="6"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                to                  </span>
+<span class="ref"         index="7"           aligned-index="7"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                make                  </span>
+<span class="ref"         index="8"           aligned-index="8"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                it                  </span>
+<span class="ref"         index="9"           aligned-index="9"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                for                  </span>
+<span class="ref"         index="10"           aligned-index="10"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                people                  </span>
+<span class="ref"         index="11"           aligned-index="11"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                to                  </span>
+<span class="ref"         index="12"           aligned-index="12"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                bleep                  </span>
+<span class="ref"         index="13"           aligned-index="13"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                things                  </span>
+<span class="ref"         index="14"           aligned-index="14"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                out                  </span>
+<span class="ref"         index="15"           aligned-index="15"             aligned-type="partially match"               speakerID="C" wder_err="not_error" wer_err="substitution">                so                  </span>
 </div>
 <div class="utterance" index="1" speakerID="F">
-<span class="ref-speaker">F: </span><span class="ref" index="16" aligned-index="16" aligned-type="mismatch" speakerID="F">Right</span>
-<span class="ref" index="17" aligned-index="-1" aligned-type="gap" speakerID="F">Ok</span>
-<span class="ref" index="18" aligned-index="18" aligned-type="fully match" speakerID="F">So</span>
-<span class="ref" index="19" aligned-index="19" aligned-type="fully match" speakerID="F">this</span>
-<span class="ref" index="20" aligned-index="26" aligned-type="mismatch" speakerID="F">is</span>
+<span class="ref-speaker">F: </span><span class="ref"         index="16"           aligned-index="16"             aligned-type="mismatch"               speakerID="F" wder_err="error" wer_err="substitution">                Right                  </span>
+<span class="ref"         index="17"           aligned-index="-1"             aligned-type="gap"               speakerID="F" wder_err="not_error" wer_err="deletion">                Ok                  </span>
+<span class="ref"         index="18"           aligned-index="18"             aligned-type="fully match"               speakerID="F" wder_err="error" wer_err="not_error">                So                  </span>
+<span class="ref"         index="19"           aligned-index="19"             aligned-type="fully match"               speakerID="F" wder_err="error" wer_err="not_error">                this                  </span>
+<span class="ref"         index="20"           aligned-index="26"             aligned-type="mismatch"               speakerID="F" wder_err="not_error" wer_err="substitution">                is                  </span>
 </div>
 <div class="utterance" index="2" speakerID="C">
-<span class="ref-speaker">C: </span><span class="ref" index="21" aligned-index="20" aligned-type="fully match" speakerID="C">Morgan</span>
-<span class="ref" index="22" aligned-index="21" aligned-type="fully match" speakerID="C">wants</span>
-<span class="ref" index="23" aligned-index="22" aligned-type="fully match" speakerID="C">to</span>
-<span class="ref" index="24" aligned-index="23" aligned-type="fully match" speakerID="C">make</span>
-<span class="ref" index="25" aligned-index="24" aligned-type="fully match" speakerID="C">it</span>
-<span class="ref" index="26" aligned-index="25" aligned-type="fully match" speakerID="C">hard</span>
+<span class="ref-speaker">C: </span><span class="ref"         index="21"           aligned-index="20"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                Morgan                  </span>
+<span class="ref"         index="22"           aligned-index="21"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                wants                  </span>
+<span class="ref"         index="23"           aligned-index="22"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                to                  </span>
+<span class="ref"         index="24"           aligned-index="23"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                make                  </span>
+<span class="ref"         index="25"           aligned-index="24"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                it                  </span>
+<span class="ref"         index="26"           aligned-index="25"             aligned-type="fully match"               speakerID="C" wder_err="not_error" wer_err="not_error">                hard                  </span>
 </div>
 <div class="utterance" index="3" speakerID="F">
-<span class="ref-speaker">F: </span><span class="ref" index="27" aligned-index="-1" aligned-type="gap" speakerID="F">The</span>
-<span class="ref" index="28" aligned-index="28" aligned-type="fully match" speakerID="F">uh</span>
-<span class="ref" index="29" aligned-index="30" aligned-type="fully match" speakerID="F">counter</span>
-<span class="ref" index="30" aligned-index="31" aligned-type="fully match" speakerID="F">is</span>
-<span class="ref" index="31" aligned-index="32" aligned-type="fully match" speakerID="F">not</span>
-<span class="ref" index="32" aligned-index="33" aligned-type="fully match" speakerID="F">moving</span>
-<span class="ref" index="33" aligned-index="34" aligned-type="partially match" speakerID="F">again</span>
-<span class="ref" index="34" aligned-index="35" aligned-type="fully match" speakerID="F">it</span>
+<span class="ref-speaker">F: </span><span class="ref"         index="27"           aligned-index="-1"             aligned-type="gap"               speakerID="F" wder_err="not_error" wer_err="deletion">                The                  </span>
+<span class="ref"         index="28"           aligned-index="28"             aligned-type="fully match"               speakerID="F" wder_err="not_error" wer_err="not_error">                uh                  </span>
+<span class="ref"         index="29"           aligned-index="30"             aligned-type="fully match"               speakerID="F" wder_err="not_error" wer_err="not_error">                counter                  </span>
+<span class="ref"         index="30"           aligned-index="31"             aligned-type="fully match"               speakerID="F" wder_err="not_error" wer_err="not_error">                is                  </span>
+<span class="ref"         index="31"           aligned-index="32"             aligned-type="fully match"               speakerID="F" wder_err="not_error" wer_err="not_error">                not                  </span>
+<span class="ref"         index="32"           aligned-index="33"             aligned-type="fully match"               speakerID="F" wder_err="not_error" wer_err="not_error">                moving                  </span>
+<span class="ref"         index="33"           aligned-index="34"             aligned-type="partially match"               speakerID="F" wder_err="error" wer_err="substitution">                again                  </span>
+<span class="ref"         index="34"           aligned-index="35"             aligned-type="fully match"               speakerID="F" wder_err="error" wer_err="not_error">                it                  </span>
 </div>
 <div class="utterance" index="4" speakerID="D">
-<span class="ref-speaker">D: </span><span class="ref" index="35" aligned-index="29" aligned-type="mismatch" speakerID="D">It</span>
-<span class="ref" index="36" aligned-index="38" aligned-type="fully match" speakerID="D">it</span>
-<span class="ref" index="37" aligned-index="39" aligned-type="partially match" speakerID="D">doesnt</span>
+<span class="ref-speaker">D: </span><span class="ref"         index="35"           aligned-index="29"             aligned-type="mismatch"               speakerID="D" wder_err="error" wer_err="substitution">                It                  </span>
+<span class="ref"         index="36"           aligned-index="38"             aligned-type="fully match"               speakerID="D" wder_err="not_error" wer_err="not_error">                it                  </span>
+<span class="ref"         index="37"           aligned-index="39"             aligned-type="partially match"               speakerID="D" wder_err="error" wer_err="substitution">                doesnt                  </span>
 </div>
 <div class="utterance" index="5" speakerID="F">
-<span class="ref-speaker">F: </span><span class="ref" index="38" aligned-index="36" aligned-type="partially match" speakerID="F">It</span>
-<span class="ref" index="39" aligned-index="37" aligned-type="fully match" speakerID="F">doesnt</span>
-<span class="ref" index="40" aligned-index="40" aligned-type="fully match" speakerID="F">like</span>
-<span class="ref" index="41" aligned-index="41" aligned-type="fully match" speakerID="F">me</span>
-<span class="ref" index="42" aligned-index="42" aligned-type="fully match" speakerID="F">but</span>
+<span class="ref-speaker">F: </span><span class="ref"         index="38"           aligned-index="36"             aligned-type="partially match"               speakerID="F" wder_err="error" wer_err="substitution">                It                  </span>
+<span class="ref"         index="39"           aligned-index="37"             aligned-type="fully match"               speakerID="F" wder_err="error" wer_err="not_error">                doesnt                  </span>
+<span class="ref"         index="40"           aligned-index="40"             aligned-type="fully match"               speakerID="F" wder_err="not_error" wer_err="not_error">                like                  </span>
+<span class="ref"         index="41"           aligned-index="41"             aligned-type="fully match"               speakerID="F" wder_err="not_error" wer_err="not_error">                me                  </span>
+<span class="ref"         index="42"           aligned-index="42"             aligned-type="fully match"               speakerID="F" wder_err="not_error" wer_err="not_error">                but                  </span>
 </div>
 </div>
  </div>
@@ -258,4 +306,16 @@ span[aligned-type="mismatch"] {
   //   matched_index = matched_index_arr[1]
   //   $('#'+index_str).toggleClass("highlight")
   // })
+  $('.metric-container.WDER').click(function() {
+    console.log("click")
+    var span = $('span[wder_err="error"]');
+    if (span.css('color') == 'rgb(0, 0, 128)') {
+      span.css('color', '');
+    } else {
+      span.css('color', 'rgb(0, 0, 128)');
+    }
+    // $('span[wder_err="error"]').css('color', 'red');
+  });
+
+
 });</script>
