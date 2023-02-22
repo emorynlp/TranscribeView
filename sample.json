@@ -1,5 +1,10 @@
 {
     "ref": {
+        "speakers": [
+            "C",
+            "F",
+            "D"
+        ],
         "sequences": [
             [
                 {
@@ -7,7 +12,7 @@
                     "index": 0,
                     "aligned-index": 0,
                     "speakerID": "C",
-                    "aligned-type": "fully match"
+                    "aligned-type": "mismatch"
                 },
                 {
                     "token": "much",
@@ -308,15 +313,16 @@
                     "aligned-type": "fully match"
                 }
             ]
-        ]
+        ],
+        "token-num": 43
     },
     "hyp": {
         "sequence": [
             {
-                "token": "how",
+                "token": "\ufeffhow",
                 "index": 0,
                 "speakerID": "0",
-                "aligned-type": "fully match"
+                "aligned-type": "mismatch"
             },
             {
                 "token": "much",
@@ -570,6 +576,12 @@
                 "speakerID": "1",
                 "aligned-type": "fully match"
             }
-        ]
+        ],
+        "speakers": [
+            "1",
+            "0",
+            "2"
+        ],
+        "token-num": 41
     }
 }

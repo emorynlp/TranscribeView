@@ -69,39 +69,51 @@ def refDict(alignedTokenList:list[list[str]], alignedIndexList:list[list[int]], 
     processedTokenList.append([token for token in seq if token != '-'])
   
   sequences = []
+  speaker_set = set()
+  tokenNum = 0
   for i, seq in enumerate(processedTokenList):
-    seqDict = {}
     curr_seq = []
     speakerID = speakerList[i]
+    speaker_set.add(speakerID)
     for j, token in enumerate(seq):
       tokenInfo = {}
       tokenInfo['token'] = token
       tokenInfo['index'] = int(orginalIndexList[i][j])
       tokenInfo['aligned-index'] = int(alignedIndexList[i][j])
       tokenInfo['speakerID'] = speakerID
+      if token != '-':
+        tokenNum += 1
       if tokenInfo['aligned-index'] < 0:
         tokenInfo['aligned-type'] = 'gap'
       else:
         tokenInfo['aligned-type'] = alignedType[tokenInfo['aligned-index']]
       curr_seq.append(tokenInfo)
-    # TODO: use speaker id
     sequences.append(curr_seq)
   
+  result['speakers'] = list(speaker_set)
   result['sequences'] = sequences
+  result['token-num'] = tokenNum
   return result
 
 def hypDict(tokens:list[list[str]], alignedType:list[str], hypSpeakerList:list[str,int]):
   result = {}
   seq = []
+  speaker_set = set()
+  tokenNum = 0
   for i, token in enumerate(tokens):
     tokenInfo = {}
     tokenInfo['token'] = token
     tokenInfo['index'] = i
     tokenInfo['speakerID'] = hypSpeakerList[i]
+    if hypSpeakerList[i] != '-':
+      speaker_set.add(hypSpeakerList[i])
+      tokenNum += 1
     # TODO: tokenInfo['alignedSpeaker']
     tokenInfo['aligned-type'] = alignedType[i]
     seq.append(tokenInfo)
   result['sequence'] = seq
+  result['speakers'] = list(speaker_set)
+  result['token-num'] = tokenNum
   return result
 
 def writeJson(name):

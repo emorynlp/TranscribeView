@@ -81,8 +81,13 @@ body {
 }
 
 .inner-utterance {
-  /* border-left: 2px solid; */
+  border-left: 2px solid;
   padding-left: 10px;
+}
+
+.inner-utterance:hover {
+  border-left: 5px;
+
 }
 
 .ref-speaker{

@@ -81,8 +81,13 @@
 }
 
 .inner-utterance {
-  /* border-left: 2px solid; */
+  border-left: 2px solid;
   padding-left: 10px;
+}
+
+.inner-utterance:hover {
+  border-left: 5px;
+
 }
 
 .ref-speaker{
@@ -395,4 +400,6 @@ $(document).ready(function(){
 
   // Add an "unmatched" class to the remaining spans
   $('span.speaker').not("[class*='mapped-speakers']").addClass("unmatched-speakers");
+
+  // TODO: make vertical line clickable
 });</script>

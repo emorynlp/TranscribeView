@@ -70,4 +70,6 @@ $(document).ready(function(){
 
   // Add an "unmatched" class to the remaining spans
   $('span.speaker').not("[class*='mapped-speakers']").addClass("unmatched-speakers");
+
+  // TODO: make vertical line clickable
 });
