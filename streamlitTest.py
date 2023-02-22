@@ -79,12 +79,14 @@ if __name__ == "__main__":
   with st.sidebar:
     uploaded_file = st.file_uploader("Upload the alignment result")
       
-    add_selectbox = st.sidebar.selectbox("Is this multi-speaker conversation?", ("yes", "no"))
     selected_metrics = st.sidebar.multiselect(
       "Evaluation Metric",
       metric_options
     )
-    err_highlight = st.sidebar.checkbox("Highlight errors")
+    
+    align_speaker = st.sidebar.checkbox("Show Speaker Alignment")
+    sd_err_highlight = st.sidebar.checkbox("Highlight diarization errors")
+    asr_err_highlight = st.sidebar.checkbox("Highlight ASR errors")
   
   if uploaded_file is not None:
     bytes_data = uploaded_file.getvalue()

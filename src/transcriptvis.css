@@ -75,9 +75,14 @@ body {
   height: 610px;
 }
 
-.utterance {
+.utterance-container {
   padding-bottom: 15px;
   /* text-underline-offset: 1; */
+}
+
+.inner-utterance {
+  /* border-left: 2px solid; */
+  padding-left: 10px;
 }
 
 .ref-speaker{
@@ -140,6 +145,17 @@ ul.metrics {
   padding-right: 5px;
 }
 
+.mapped-speakers {
+  /* text-decoration: solid underline */
+}
+
+/* .mapped-speakers.pair1 {
+  color: #ef476f;
+} */
+
+.unmatched-speakers {
+  color: grey;
+}
 /* span[aligned-type="gap"] {
   color: brown;
   text-decoration: line-through;

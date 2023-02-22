@@ -25,10 +25,10 @@ def generateSpansFromMultiSeq(sequences):
   html_string = ""
   for utt_id, utt in enumerate(utterances):
     speakerID = utt[0]["speakerID"]
-    utt_div_Start = f'<div class="utterance" index="{utt_id}" speakerID="{speakerID}">\n'
-    utt_div_End = '</div>\n'
+    utt_div_Start = f'<div class="utterance-container" index="{utt_id}" speakerID="{speakerID}">\n <div class="inner-utterance" speakerID="{speakerID}">\n'
+    utt_div_End = '</div>\n</div>\n'
     spans=[]
-    speakerSpan = f'<span class="ref-speaker">{speakerID}: </span>'
+    speakerSpan = f'<span class="speaker" id="{speakerID}">{speakerID}: </span>'
     spans.append(speakerSpan)
     for token in utt:
       index = token['index']
@@ -56,10 +56,10 @@ def generateSpansForHypSeq(sequence) -> str:
   html_string = ""
   for utt_id, utt in enumerate(utterances):
     speakerID = utt[0]["speakerID"]
-    utt_div_Start = f'<div class="utterance" index="{utt_id}" speakerID="{speakerID}">\n'
-    utt_div_End = '</div>\n'
+    utt_div_Start = f'<div class="utterance-container" index="{utt_id}" speakerID="{speakerID}">\n <div class="inner-utterance" speakerID="{speakerID}">\n'
+    utt_div_End = '</div>\n</div>\n'
     spans=[]
-    speakerSpan = f'<span class="hyp-speaker">{speakerID}: </span>'
+    speakerSpan = f'<span class="speaker" id="{speakerID}">{speakerID}: </span>'
     spans.append(speakerSpan)
     for token in utt:
       index = token['index']
@@ -121,7 +121,7 @@ def getMetricHtmlStr(metrics, eval:Eval):
           </li>'.format(wer)
   return htmlStart + htmlEnd
 
-def htmlElements(metric, refstr, hypstr):
+def htmlElements(metric, refstr, hypstr, speakerMapping: dict):
   ref = '<div class = "ref-container" id="ref">\n'+\
         '<div class= "ref-header"> Reference </div>' +\
     '<div class = "ref-text">' +\
@@ -130,9 +130,11 @@ def htmlElements(metric, refstr, hypstr):
     '<div class= "hyp-header"> Hypothesis </div>' + \
     '<div class = "hyp-text">' +\
       hypstr + '</div>\n </div>\n'
+    
+  speakerMapping = '<div class="speaker-mapping" style="display:none;">' + json.dumps(speakerMapping) + '</div>'
   
   doc_container = '<div class="doc-container">'+ hyp + ref  + '</div>'
-  body = ' <body>\n'+  metric + doc_container + '</body>'
+  body = ' <body>\n'+ speakerMapping + metric + doc_container + '</body>'
   # body = "<div id=\"hyp\">" + refstr + " </div><hr>" + "<div id=\"ref\">" + hypstr + "</div>\n"
   return [
     local_css(Path(__file__).parent / "src" / "transcriptvis.css"),
@@ -141,9 +143,9 @@ def htmlElements(metric, refstr, hypstr):
     local_script(Path(__file__).parent / "src" / "transcriptvis.js"),
   ]
   
-def getHtmlString(metric, refstr, hypstr):
+def getHtmlString(metric, refstr, hypstr, speakerMapping):
   resultStr = ""
-  for element in htmlElements(metric, refstr, hypstr):
+  for element in htmlElements(metric, refstr, hypstr, speakerMapping):
     resultStr += element
   return resultStr
 
@@ -171,10 +173,11 @@ class visComponents:
     self.metrics = selectedMetrics
   
   def getHtmlStr(self):
+    speakerMapping = self.eval.speakerMapping
     metricStr = getMetricHtmlStr(self.metrics, self.eval)
     refstr = generateSpansFromMultiSeq(self.eval.refSequences)
     hypstr = generateSpansForHypSeq(self.eval.hypTokens)
-    htmlStr = getHtmlString(metricStr, refstr,hypstr)
+    htmlStr = getHtmlString(metricStr, refstr, hypstr, self.eval.speakerMapping)
     return htmlStr
   
   
@@ -196,7 +199,7 @@ def writeHtmlTest(refstr, hypstr):
     # f.write(" </div>\n</body>\n</html>")
 
 if __name__ == "__main__":
-  data = readData("sample.json")
+  data = readData("mysample.json")
   # refSequences = data['ref']['sequences']
   # hypSequence = data['hyp']['sequence']
 
