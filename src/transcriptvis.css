@@ -81,7 +81,7 @@ body {
 }
 
 .inner-utterance {
-  border-left: 2px solid;
+  /* border-left: 2px solid; */
   padding-left: 10px;
 }
 

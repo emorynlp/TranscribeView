@@ -43,6 +43,14 @@ from eval import Eval
 
 # with col1:
 
+multi_select_theme =     """
+    <style>
+    span[data-baseweb="tag"] {
+      background-color: #06d6a0 !important;
+    }
+    </style>
+"""
+
 metric_options = ['WDER', 'WER', 'TDER', 'F1']
 
 class alignmentResult:
@@ -107,7 +115,7 @@ if __name__ == "__main__":
   # ==============
   with st.sidebar:
     uploaded_file = st.file_uploader("Upload the alignment result")
-    
+    st.markdown(multi_select_theme,unsafe_allow_html=True)
     default_selection = metric_options
     selected_metrics = st.sidebar.multiselect(
       "Evaluation Metric",
