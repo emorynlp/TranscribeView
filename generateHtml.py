@@ -138,10 +138,30 @@ def getMetricHtmlStr(metrics, eval:Eval):
               <div class="metric-value">{:.2f}</div>\
             </div>\
           </li>'.format(tder)
+    elif option == "Precision":
+      f1, p, r = eval.F1()
+      # print("precision:", p, "\n",  "recall:", r)
+      # f1 = 0.79 # testing
+      htmlStart += '<li id="Precision" class="selected metric">\
+              <div class="metric-container Precision">\
+              <div class="metric-name">Precision </div>\
+              <div class="metric-value">{:.2f}</div>\
+            </div>\
+          </li>'.format(p)
+    elif option == "Recall":
+      f1, p, r = eval.F1()
+      # print("precision:", p, "\n",  "recall:", r)
+      # f1 = 0.79 # testing
+      htmlStart += '<li id="Recall" class="selected metric">\
+              <div class="metric-container Recall">\
+              <div class="metric-name">Recall </div>\
+              <div class="metric-value">{:.2f}</div>\
+            </div>\
+          </li>'.format(r)    
 
   return htmlStart + htmlEnd
 
-def htmlElements(metric, refstr, hypstr, speakerMapping: dict):
+def htmlElements(metric, refstr, hypstr, speakerMapping: dict, annotation:str):
   ref = '<div class = "ref-container" id="ref">\n'+\
         '<div class= "ref-header"> Reference </div>' +\
     '<div class = "ref-text">' +\
@@ -150,11 +170,14 @@ def htmlElements(metric, refstr, hypstr, speakerMapping: dict):
     '<div class= "hyp-header"> Hypothesis </div>' + \
     '<div class = "hyp-text">' +\
       hypstr + '</div>\n </div>\n'
-    
+  
+  if not annotation:
+    annotation = ""
+  annotationStr = '<div class="annotation_option" style="display:none;">' + annotation + '</div>'
   speakerMapping = '<div class="speaker-mapping" style="display:none;">' + json.dumps(speakerMapping) + '</div>'
   
   doc_container = '<div class="doc-container">'+ hyp + ref  + '</div>'
-  body = ' <body>\n'+ speakerMapping + metric + doc_container + '</body>'
+  body = ' <body>\n'+ speakerMapping + annotationStr + metric + doc_container + '</body>'
   # body = "<div id=\"hyp\">" + refstr + " </div><hr>" + "<div id=\"ref\">" + hypstr + "</div>\n"
   return [
     local_css(Path(__file__).parent / "src" / "transcriptvis.css"),
@@ -162,12 +185,6 @@ def htmlElements(metric, refstr, hypstr, speakerMapping: dict):
     local_script(Path(__file__).parent / "src" / "jquery-3.6.3.min.js"),
     local_script(Path(__file__).parent / "src" / "transcriptvis.js"),
   ]
-  
-def getHtmlString(metric, refstr, hypstr, speakerMapping):
-  resultStr = ""
-  for element in htmlElements(metric, refstr, hypstr, speakerMapping):
-    resultStr += element
-  return resultStr
 
 def group_tokens_into_utterances(tokens) -> list:
     utterances = []
@@ -183,21 +200,26 @@ def group_tokens_into_utterances(tokens) -> list:
             current_speaker = speaker
         current_utterance.append(token)
     utterances.append(current_utterance)
-    print(len(utterances))
+    # print(len(utterances))
     return utterances
 
 class visComponents:
-  def __init__(self, data, selectedMetrics:list = None) -> None:
+  def __init__(self, data, selectedMetrics:list = None, annotation_option:str = None) -> None:
     self.data = data
     self.eval = Eval(hypTokens=data['hyp']['sequence'], refSequences=data['ref']['sequences'])
     self.metrics = selectedMetrics
+    self.annotation_option = annotation_option
   
   def getHtmlStr(self):
     speakerMapping = self.eval.speakerMapping
     metricStr = getMetricHtmlStr(self.metrics, self.eval)
     refstr = generateSpansFromMultiSeq(self.eval.refSequences)
     hypstr = generateSpansForHypSeq(self.eval.hypTokens)
-    htmlStr = getHtmlString(metricStr, refstr, hypstr, self.eval.speakerMapping)
+    # htmlStr = getHtmlString(metricStr, refstr, hypstr, self.eval.speakerMapping)
+    elements = htmlElements(metricStr, refstr, hypstr, self.eval.speakerMapping, self.annotation_option)
+    htmlStr = ""
+    for element in elements:
+      htmlStr += element
     return htmlStr
   
   
@@ -226,5 +248,5 @@ if __name__ == "__main__":
   selected_metrics = ['WER', "WDER"]
   components = visComponents(data, selected_metrics)
   htmlStr = components.getHtmlStr()
-  with open("testTokens.html", "w") as f:
+  with open("data/testTokens.html", "w") as f:
       f.write(htmlStr)

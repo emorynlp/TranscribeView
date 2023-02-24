@@ -104,16 +104,39 @@ class Eval():
             self.hypTokens[aligned_index]['WDER_err'] = True # record WDER error
             token['WDER_err'] = True
             error_count += 1
+        else:
+          token['WDER_err'] = True
+          self.hypTokens[aligned_index]['WDER_err'] = True # for testing, not wder err
 
+    for i, token in enumerate(self.hypTokens): # for testing
+      if token['aligned-type'] == 'gap':
+        token['WDER_err'] = True
+        continue
+      # refToken = self.getHypTokenAlignedRefToken(token['index'])
+      # if not refToken:
+      #   token['WDER_err'] = True
+      #   print("not find")
+      # if self.speakerMapping[refToken['speakerID']] != token['speakerID']:
+      #   token['WDER_err'] = True
+      #   print("wrong speaker")
+      #   print(self.hypTokens[i])
     return error_count/aligned_num
+  
+  def getHypTokenAlignedRefToken(self, hyp_index):
+    for seq in self.refSequences:
+      for token in seq:
+        if token['aligned-index'] == hyp_index:
+          return token
+    return None
     
   def WER(self):
     # d, i, sub
     deletion, insertion, substitution = 0,0,0
-    for token in self.hypTokens:
+    for i, token in enumerate(self.hypTokens):
       if token['token'] != '-' and token['aligned-type'] == 'gap':
         insertion += 1
-        token['WER_err'] = 'i'
+        # token['WER_err'] = 'i'
+        self.hypTokens[i]['WER_err'] = 'i'
         
     for seq in self.refSequences:
       for token in seq:
@@ -123,7 +146,19 @@ class Eval():
         if token['aligned-type'] == 'partially match' or token['aligned-type'] == 'mismatch':
           substitution += 1
           token['WER_err'] = 's'
-    all_token_num = sum([len(seq) for seq in self.refSequences])
+    # all_token_num = sum([len(seq) for seq in self.refSequences])
+    all_token_num = 0
+    for seq in self.refSequences:
+      for token in seq:
+        # print(token)
+        if token['token'] != '-':
+          all_token_num += 1
+          
+    # print("deletion: ", deletion)
+    # print("insertion: ", insertion)
+    # print("substitution: ", substitution)
+    # print(all_token_num)
+    # print((deletion+insertion+substitution)/all_token_num)
     return (deletion+insertion+substitution)/all_token_num
     
 

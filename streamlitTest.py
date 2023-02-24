@@ -1,47 +1,8 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
-from pathlib import Path
-from generateHtml import readData, generateSpansFromMultiSeq, generateSpansForHypSeq, getHtmlString, visComponents
+from generateHtml import visComponents
 import json
 from eval import Eval
-# DATE_COLUMN = 'date/time'
-# DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
-#             'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
 
-# @st.cache
-# def load_data(nrows):
-#     data = pd.read_csv(DATA_URL, nrows=nrows)
-#     lowercase = lambda x: str(x).lower()
-#     data.rename(lowercase, axis='columns', inplace=True)
-#     data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])
-#     return data
-  
-# col1, col2 = st.columns((3, 3))
-# filename = col1.selectbox(label="File:", options=["1","2"])
-
-
-# data_load_state = st.text('Loading data...')
-# data = load_data(10000)
-# data_load_state.text("Done! (using st.cache)")
-
-# if st.checkbox('Show raw data'):
-#     st.subheader('Raw data')
-#     st.write(data)
-
-# st.subheader('Number of pickups by hour')
-# hist_values = np.histogram(data[DATE_COLUMN].dt.hour, bins=24, range=(0,24))[0]
-# st.bar_chart(hist_values)
-
-# with col2:
-#   # Some number in the range 0-23
-#   hour_to_filter = st.slider('hour', 0, 23, 17)
-#   filtered_data = data[data[DATE_COLUMN].dt.hour == hour_to_filter]
-
-#   st.subheader('Map of all pickups at %s:00' % hour_to_filter)
-#   st.map(filtered_data)
-
-# with col1:
 
 multi_select_theme =     """
     <style>
@@ -51,7 +12,12 @@ multi_select_theme =     """
     </style>
 """
 
-metric_options = ['WDER', 'WER', 'TDER', 'F1']
+metric_options = ['WDER', 'WER', 'TDER', 'F1', 'Precision', 'Recall']
+annotation_options = ['Speaker Diarization Error (SD)', 'Speech Recognition Error (ASR)']
+annotation_option_map = {
+  'Speaker Diarization Error (SD)': 'SD',
+  'Speech Recognition Error (ASR)' : 'ASR'
+}
 
 class alignmentResult:
   def __init__(self, data:dict, speakerMapping:dict):
@@ -123,31 +89,20 @@ if __name__ == "__main__":
       default=default_selection
     )
     
-    align_speaker = st.sidebar.checkbox("Show Speaker Alignment")
-    sd_err_highlight = st.sidebar.checkbox("Highlight diarization errors")
-    asr_err_highlight = st.sidebar.checkbox("Highlight ASR errors")
-  
+    # align_speaker = st.sidebar.checkbox("Show Speaker Alignment")
+    # sd_err_highlight = st.sidebar.checkbox("Highlight diarization errors")
+    # asr_err_highlight = st.sidebar.checkbox("Highlight ASR errors")
+
+    selected_annotation = st.selectbox("Choose Annotation Type", annotation_options)
+    annotationType = annotation_option_map[selected_annotation]
+    
   if uploaded_file is not None:
     bytes_data = uploaded_file.getvalue()
     data = json.loads(bytes_data)
 
-    # refSequences = data['ref']['sequences']
-    # hypSequence = data['hyp']['sequence']
-    # refstr = generateSpansFromMultiSeq(refSequences)
-    # hypstr = generateSpansForHypSeq(hypSequence)
-    # eval = Eval(hypTokens=hypSequence, refSequences=refSequences)
-    # speakerMapping = eval.speakerMapping
-    # st.write(speakerMapping)
-    # displayMetric(selected_metrics, data)
-    # htmlStr = getHtmlString(refstr,hypstr)
-    components = visComponents(data, selected_metrics)
+    components = visComponents(data, selected_metrics, annotationType)
     stats = alignmentResult(data, components.eval.speakerMapping)
     stats.showStats()
     htmlStr = components.getHtmlStr()
-    with st.container():
-      # path = Path(__file__).parent / "testTokens.html"
-      # # st.components.v1.html(str(path))
-      # file = open("testTokens.html")
-      # st.components.v1.html(file.read(),height=720, scrolling=True)
-      # file.close()
-      st.components.v1.html(htmlStr,height=720, scrolling=True)
+    # with st.container():
+    st.components.v1.html(htmlStr,height=720, scrolling=True)

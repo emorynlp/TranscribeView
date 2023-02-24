@@ -60,6 +60,7 @@ body {
   flex: 1;
   border: 1px solid #e9e9e9;
   height: 610px;
+  overflow: auto;
 }
 
 
@@ -73,6 +74,7 @@ body {
   flex: 1;
   border: 1px solid #e9e9e9;
   height: 610px;
+  overflow: auto;
 }
 
 .utterance-container {

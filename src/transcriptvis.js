@@ -59,11 +59,11 @@ $(document).ready(function(){
     // Add a class to set the color based on the index
     $sourceSpans.addClass("mapped-speakers " + "pair" + i);
     $sourceSpans.css("color", colors[i])
-    $refUtteranceDivs.css( "border-left", "2px solid #" + colors[i])
+    $refUtteranceDivs.css( "border-left", "3px solid #" + colors[i])
 
     $targetSpans.addClass("mapped-speakers " + "pair"+ i);
     $targetSpans.css("color", colors[i])
-    $hypUtteranceDivs.css( "border-left", "2px solid #" + colors[i])
+    $hypUtteranceDivs.css( "border-left", "3px solid #" + colors[i])
     console.log("2px solid " + colors[i])
     i++;
   }
@@ -72,4 +72,16 @@ $(document).ready(function(){
   $('span.speaker').not("[class*='mapped-speakers']").addClass("unmatched-speakers");
 
   // TODO: make vertical line clickable
+
+  // trigger annotation
+  annotationType = $('.annotation_option').text()
+  if(annotationType) {
+    if (annotationType=="SD") {
+      var span = $('span[wder_err="error"]');
+      span.css('text-decoration', '3px solid underline #EF476F');
+    } else if (annotationType=="ASR") {
+      var span = $('span[wer_err=="insertion"]');
+      span.css('text-decoration', '3px solid underline #EF476F');
+    }
+  }
 });
