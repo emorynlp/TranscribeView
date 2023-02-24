@@ -120,17 +120,18 @@ def getMetricHtmlStr(metrics, eval:Eval):
             </div>\
           </li>'.format(wer)
     elif option == "F1":
-      # f1 = eval.F1()
-      f1 = 0.79 # testing
+      f1, p, r = eval.F1()
+      # print("precision:", p, "\n",  "recall:", r)
+      # f1 = 0.79 # testing
       htmlStart += '<li id="F1" class="selected metric">\
               <div class="metric-container F1">\
               <div class="metric-name">F1 </div>\
               <div class="metric-value">{:.2f}</div>\
             </div>\
-          </li>'.format(wer)
+          </li>'.format(f1)
     elif option == "TDER":
-      # tder = eval.TDER()
-      tder = 0.43 # testing
+      tder = eval.TDER()
+      # tder = 0.43 # testing
       htmlStart += '<li id="TDER" class="selected metric">\
               <div class="metric-container TDER">\
               <div class="metric-name">TDER </div>\
@@ -182,7 +183,7 @@ def group_tokens_into_utterances(tokens) -> list:
             current_speaker = speaker
         current_utterance.append(token)
     utterances.append(current_utterance)
-    # print(len(utterances))
+    print(len(utterances))
     return utterances
 
 class visComponents:

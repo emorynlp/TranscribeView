@@ -116,27 +116,34 @@ def hypDict(tokens:list[list[str]], alignedType:list[str], hypSpeakerList:list[s
   result['token-num'] = tokenNum
   return result
 
-def writeJson(name):
-  all_data = readcsv("example_output.csv")
+def writeJson(name, output_name):
+  all_data = readcsv(name)
   hypTokens = all_data[0]
-  alignedTokens, alignedIndices, orignalIndices, alignedType = all_data[1:4], all_data[5:8], all_data[8:11], all_data[4]
-  refSpeakers, hypSpeakerList = all_data[11], all_data[12]
+  alignedTokens, alignedIndices, orignalIndices, alignedType = all_data[1:5], all_data[6:10], all_data[10:14], all_data[5]
+  refSpeakers, hypSpeakerList = all_data[14], all_data[15]
   ref = refDict(alignedTokens, alignedIndices, orignalIndices, alignedType, refSpeakers)
   hyp = hypDict(hypTokens, alignedType, hypSpeakerList)
   output = {}
   output['ref'] = ref
   output['hyp'] = hyp
   json_object = json.dumps(output, indent=4)
-  with open("sample.json", "w") as outfile:
+  with open(output_name, "w") as outfile:
     outfile.write(json_object)
   
   
 def test():
-  all_data = readcsv("example_output.csv")
-  alignedTokens, alignedIndices, orignalIndices, alignedType = all_data[1:4], all_data[5:8], all_data[8:11], all_data[4]
+  # all_data = readcsv("example_output.csv")
+  # alignedTokens, alignedIndices, orignalIndices, alignedType = all_data[1:4], all_data[5:8], all_data[8:11], all_data[4]
+  
+  all_data = readcsv("data/Bdb001_short_tokens_amazon.csv")
+  alignedTokens, alignedIndices, orignalIndices, alignedType = all_data[1:5], all_data[6:10], all_data[10:14], all_data[5]
   
   refDict(alignedTokens, alignedIndices, orignalIndices, alignedType)
 
 
 if __name__ == "__main__":
-  writeJson("example_output.csv")
+  # name = "data/rev_bdb001.csv"
+  name = "data/amazon_bdb001.csv"
+  # output_name = "data/rev_001.json"
+  output_name = "data/amazon_001.json"
+  writeJson(name,output_name)

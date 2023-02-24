@@ -29,6 +29,9 @@ class Eval():
     self.refSpeakers = [seq[0]['speakerID'] for i, seq in enumerate(refSequences)]
     self.refSpeakerIndex = {spkID: i for i, spkID in enumerate(self.refSpeakers)}
     self.speakerMapping = self.get_speaker_mapping()
+    self.set_ref_utterances()
+    self.group_token_into_utterances()
+
     
   def get_speaker_mapping(self):
     cost_matrix = self.build_cost_matrix()
@@ -54,6 +57,34 @@ class Eval():
         ref_aligned_indices_for_curr_spk = [token['aligned-index'] for token in refTokens]
         cost_matrix[i, self.hypSpeakerIndex[hypSpk]] += len(set(ref_aligned_indices_for_curr_spk) & set(hyp_indices_for_curr_spk))
     return cost_matrix
+  
+  def set_ref_utterances(self):
+    all_tokens = []
+    for i, seq in enumerate(self.refSequences):
+      for token in seq:
+        all_tokens.append(token)
+    self.sortedTokens = sorted(all_tokens, key=lambda x: x['index'])
+    
+  def group_token_into_utterances(self):
+    """utterance here is different than generateHtml, we ignore gap tokens her
+    """
+    utterances = []
+    current_utterance = []
+    current_speaker = None
+    for token in self.sortedTokens:
+        speaker = token['speakerID']
+        if token['token'] == '-':
+          continue
+        if current_speaker is None:
+            current_speaker = speaker
+        elif current_speaker != speaker:
+            utterances.append(current_utterance)
+            current_utterance = []
+            current_speaker = speaker
+        current_utterance.append(token)
+    utterances.append(current_utterance)
+    self.ref_utterances = utterances
+    # print(len(self.ref_utterances))
   
   def WDER(self):
     """Word diarization error rate:
@@ -96,19 +127,76 @@ class Eval():
     return (deletion+insertion+substitution)/all_token_num
     
 
+  def TDER(self):
+    """_summary_
+    """
+    numerator, denominator = 0,0
+    
+    for utt in self.ref_utterances:
+      length = len(utt)
+      hyp_spks = set()
+      ref_spk = utt[0]['speakerID']
+      for token in utt:
+        hypIndex = token['aligned-index']
+        hypSpk = self.hypTokens[hypIndex]['speakerID']
+        if hypSpk != '-':
+          hyp_spks.add(hypSpk)
+      
+      alignedHypSpk = self.speakerMapping[ref_spk]
+      if alignedHypSpk in hyp_spks:
+        Ncorrect = 1
+      else:
+        Ncorrect = 0
+      
+      denominator += length
+      numerator += length*(max(1, len(hyp_spks))-Ncorrect)
+    return numerator/denominator
+      
+        
+        
 
+  def F1(self):
+    """_summary_
+    """
+    # recall
+    ref_token_count = 0
+    correct_num = 0
+    for seq in self.refSequences:
+      for token in seq:
+        if token['token'] == '-':
+          continue
+        ref_token_count += 1
+        refSpk = token['speakerID']
+        aligned_index = token['aligned-index']
+        if aligned_index == -1:
+          continue
+        else:
+          hypSpk = self.hypTokens[aligned_index]['speakerID']
+          if self.speakerMapping[refSpk] == hypSpk:
+            correct_num += 1
+    recall = correct_num/ref_token_count
+    
+    # precision
+    hyp_token_count = len(self.hypTokens)
+    precision = correct_num/hyp_token_count
+    # print(hyp_token_count)
+    # print(ref_token_count)
+    
+    return 2*precision*recall/(precision+recall), precision, recall
+      
+          
+      
+    
+  
+  def WJER(hyp_spk_labels, ref_spks_alignments):
+    """Word-level Jaccard error rate
 
+    Args:
+        hyp_spk_labels (_type_): _description_
+        ref_spks_alignments (_type_): _description_
+    """
 
-
-def WJER(hyp_spk_labels, ref_spks_alignments):
-  """Word-level Jaccard error rate
-
-  Args:
-      hyp_spk_labels (_type_): _description_
-      ref_spks_alignments (_type_): _description_
-  """
-  pass
-
+    pass
   
 
 if __name__ == "__main__":
