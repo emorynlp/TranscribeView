@@ -9,3 +9,8 @@ pip install --upgrade pip
 pip install -r requirements.txt
 
 ```
+
+## Run
+```shell
+streamlit run transcribeView.py
+```
