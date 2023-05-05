@@ -13,7 +13,7 @@ multi_select_theme =     """
 """
 
 metric_options = ['WDER', 'WER', 'TDER', 'F1', 'Precision', 'Recall']
-annotation_options = ['Speaker Diarization Error (SD)', 'Speech Recognition Error (ASR)']
+annotation_options = ['None', 'Speaker Diarization Error (SD)', 'Speech Recognition Error (ASR)']
 annotation_option_map = {
   'Speaker Diarization Error (SD)': 'SD',
   'Speech Recognition Error (ASR)' : 'ASR'

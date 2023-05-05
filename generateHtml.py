@@ -171,7 +171,7 @@ def htmlElements(metric, refstr, hypstr, speakerMapping: dict, annotation:str):
     '<div class = "hyp-text">' +\
       hypstr + '</div>\n </div>\n'
   
-  if not annotation:
+  if annotation == 'None':
     annotation = ""
   annotationStr = '<div class="annotation_option" style="display:none;">' + annotation + '</div>'
   speakerMapping = '<div class="speaker-mapping" style="display:none;">' + json.dumps(speakerMapping) + '</div>'

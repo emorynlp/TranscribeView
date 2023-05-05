@@ -13,8 +13,9 @@ multi_select_theme =     """
 """
 
 metric_options = ['WDER', 'WER', 'TDER', 'F1', 'Precision', 'Recall']
-annotation_options = ['Speaker Diarization Error (SD)', 'Speech Recognition Error (ASR)']
+annotation_options = ['None', 'Speaker Diarization Error (SD)', 'Speech Recognition Error (ASR)']
 annotation_option_map = {
+  'None': 'None',
   'Speaker Diarization Error (SD)': 'SD',
   'Speech Recognition Error (ASR)' : 'ASR'
 }
@@ -93,7 +94,7 @@ if __name__ == "__main__":
     # sd_err_highlight = st.sidebar.checkbox("Highlight diarization errors")
     # asr_err_highlight = st.sidebar.checkbox("Highlight ASR errors")
 
-    selected_annotation = st.selectbox("Choose Annotation Type", annotation_options)
+    selected_annotation = st.selectbox("Choose Annotation Type", annotation_options, index=0)
     annotationType = annotation_option_map[selected_annotation]
     
   if uploaded_file is not None:
