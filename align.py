@@ -155,6 +155,7 @@ def test():
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()
   parser.add_argument('input_file', help='Input file path')
+  parser.add_argument('-o', '--output_file', help='Output file path')
   # Parse the command line argumentss
   args = parser.parse_args()
   # Access the values of the arguments
@@ -163,9 +164,11 @@ if __name__ == "__main__":
     print("Input Type Error: please input .csv file")
     exit()
 
-  output_name = input_file.split('.')[0] + ".json"
+  output_file = args.output_file
+  if not output_file:
+    output_file = input_file.split('.')[0] + ".json"
 
   ref, ref_speaker_label, hyp, hyp_speaker_label = readInput(input_file)
-  align_writeJson(ref, ref_speaker_label, hyp, hyp_speaker_label, output_name)
-  print(f'Alignment completed! \nOutput file: {output_name}')
+  align_writeJson(ref, ref_speaker_label, hyp, hyp_speaker_label, output_file)
+  print(f'Alignment completed! \nOutput file: {output_file}')
   
