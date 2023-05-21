@@ -29,16 +29,16 @@ $(document).ready(function(){
   //   matched_index = matched_index_arr[1]
   //   $('#'+index_str).toggleClass("highlight")
   // })
-  $('.metric-container.WDER').click(function() {
-    console.log("click")
-    var span = $('span[wder_err="error"]');
-    if (span.css('color') == 'rgb(128, 0, 0)') {
-      span.css('color', '');
-    } else {
-      span.css('color', 'rgb(128, 0, 0)');
-    }
-    // $('span[wder_err="error"]').css('color', 'red');
-  });
+  // $('.metric-container.WDER').click(function() {
+  //   console.log("click")
+  //   var span = $('span[wder_err="error"]');
+  //   if (span.css('color') == 'rgb(128, 0, 0)') {
+  //     span.css('color', '');
+  //   } else {
+  //     span.css('color', 'rgb(128, 0, 0)');
+  //   }
+  //   // $('span[wder_err="error"]').css('color', 'red');
+  // });
 
 
   // console.log($(".speaker-mapping").text())

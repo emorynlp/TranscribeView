@@ -131,13 +131,13 @@ ul.metrics {
   background-color: #FFFFFF;
   border: 1px solid #CCCCCC;
   border-radius: 4px;
-  cursor: pointer;
+  /* cursor: pointer; */
   transition: background-color 0.2s ease;
 }
 
-.metric-container:hover {
+/* .metric-container:hover {
   background-color: #F0F0F0;
-}
+} */
 
 .metric-value {
   font-size: 28px;
