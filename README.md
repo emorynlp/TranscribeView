@@ -1,11 +1,14 @@
 # TranscribeView
+
+<p align="center">
+<img src='img/TranscribeView-wide.png' title='TranscribeView' width='600'>
+</p>
+
 TranscribeView is a web-based tool designed to evaluate and visualize errors in speech recognition and speaker
 diarization. It provides an interface for assessing both speaker recognition and speaker diarization errors. The system
 leverages the 'align4d' package, a powerful multiple sequence alignment tool, to accurately map reference and hypothesis
 transcripts. By combining these features, TranscribeView aims to aid in the advancement of data-driven conversational AI research.
-<p align="center">
-<img src='img/TranscribeView-wide.png' title='TranscribeView' width='600'>
-</p>
+
 ## Installation
 
 ```shell
@@ -58,10 +61,7 @@ The following command opens up a browser window for the TranscribeView System.
 streamlit run transcribeView.py
 ```
 
-Finally, upload the JSON file in the upper left section. One example JSON file is provided in `data/example_result.json`
+
 <img src='img/file_upload.png' title='File Upload' width='200'>
 
-
-## TranscribeView
-
-### Side bar
+Finally, upload the JSON file in the upper left section. One example JSON file is provided in `data/example_result.json`
