@@ -2,8 +2,8 @@
     "ref": {
         "speakers": [
             "C",
-            "A",
             "D",
+            "A",
             "F"
         ],
         "sequences": [
@@ -10990,10 +10990,10 @@
             }
         ],
         "speakers": [
-            "spk_4",
-            "spk_1",
             "spk_3",
             "spk_2",
+            "spk_4",
+            "spk_1",
             "spk_0"
         ],
         "token-num": 748

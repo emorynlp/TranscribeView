@@ -41,7 +41,7 @@ python align.py inputfile.csv -o outputfile.json
 The `inputfile.csv` should be following the format as step 1 mentioned. The `outputfile.json` is optional. If no output
 name specified, the output will be written in `inputfile.json`.
 
-### Run TranscribeView
+### 3. Run TranscribeView
 After creating the alignment JSON file, we can finally use transcribeView to evaluate it.
 The following command opens up a browser window for the TranscribeView System.
 ```shell
