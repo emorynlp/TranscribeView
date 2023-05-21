@@ -1,24 +1,5 @@
 import numpy as np
-from scipy import optimize
-# evaluation script
-# included metrics: WDER, JER, Text-DER(utterance level), WER
-
-# neede more information:
-# the original speaker id for hypothesis and ground-truth sequences
-
-# (token, spk_id)
-# Input to alignment tool: 
-#        2 lists of tokens [hi, long, time, no, see], [Hi, long, no, see]
-#        2 lists of speaker ids and utterance segments [(1,15,A), (16,50,B) ....], [(1,13,spk_0), ...]
-#        Same for ground-truth and hypothesis transcripts
-
-# output from alignment tool:
-#         align each ground truth sequence to hypothesis transcripts
-#         1. one csv recording all words and gaps? (need speaker information for each sequence)
-#         2. [A-1, A-2, A-3, B-1, B-2, 0, 0, -1, C-1, C-2]
-#             0: gap, (-1: missmatch ?) do we need it?
-#         3. each speaker a list of alignment to target sequence, and a list of target sequence's id
-#            [1,2,3,5,0,-1,10...], [6,7,8,9,...], [15,30,31,31,...], [spk_0,spk_0,spk_1,spk_1, ....]
+from scipy import optimize #for speaker mapping
 
 class Eval():
   def __init__(self, hypTokens:list, refSequences:list) -> None:
@@ -219,19 +200,6 @@ class Eval():
     
     return 2*precision*recall/(precision+recall), precision, recall
       
-          
-      
-    
-  
-  def WJER(hyp_spk_labels, ref_spks_alignments):
-    """Word-level Jaccard error rate
-
-    Args:
-        hyp_spk_labels (_type_): _description_
-        ref_spks_alignments (_type_): _description_
-    """
-
-    pass
   
 
 if __name__ == "__main__":
