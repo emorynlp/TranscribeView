@@ -64,7 +64,7 @@ $(document).ready(function(){
     $targetSpans.addClass("mapped-speakers " + "pair"+ i);
     $targetSpans.css("color", colors[i])
     $hypUtteranceDivs.css( "border-left", "3px solid #" + colors[i])
-    console.log("2px solid " + colors[i])
+    // console.log("2px solid " + colors[i])
     i++;
   }
 
@@ -80,7 +80,12 @@ $(document).ready(function(){
       var span = $('span[wder_err="error"]');
       span.css('text-decoration', '3px solid underline #EF476F');
     } else if (annotationType=="ASR") {
-      var span = $('span[wer_err=="insertion"]');
+      console.log("ASR")
+      var span = $('span[wer_err="deletion"]');
+      span.css('text-decoration', '3px solid underline #EF476F');
+      var span = $('span[wer_err="substituion"]');
+      span.css('text-decoration', '3px solid underline #EF476F');
+      var span = $('span[wer_err="insertion"]');
       span.css('text-decoration', '3px solid underline #EF476F');
     }
   }

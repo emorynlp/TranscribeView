@@ -92,6 +92,10 @@ body {
 
 }
 
+.speaker{
+  font-weight: bold;
+}
+
 .ref-speaker{
   padding-right: 5px;
 }
@@ -121,6 +125,11 @@ ul.metrics {
   padding: 10px;
   margin: 0px 0px 10px 0px;
   /* padding-left: 10px; */
+}
+
+.metric-title {
+    font-size: large;
+    color: black;
 }
 
 .metric-container {
@@ -153,7 +162,7 @@ ul.metrics {
 }
 
 /* .mapped-speakers {
-  /* text-decoration: solid underline */
+  text-decoration: solid underline
 } */
 
 /* .mapped-speakers.pair1 {
