@@ -2,7 +2,7 @@
 
 **TranscribeView** is a web-based tool designed to evaluate and visualize errors in speech recognition and speaker
 diarization. It provides an interface for assessing both speaker recognition and speaker diarization errors. The system
-leverages the **align4d** package, a powerful multiple sequence alignment tool, to accurately map reference and hypothesis
+leverages the <a href="https://github.com/emorynlp/align4d">align4d</a> package, a powerful multiple sequence alignment tool, to accurately map reference and hypothesis
 transcripts. By combining these features, TranscribeView aims to aid in the advancement of data-driven conversational AI
 research.
 
@@ -12,7 +12,7 @@ research.
 <img src='img/TranscribeView-wide.png' title='TranscribeView' width='600'>
 </p>
 
-The above illustration shows a working example of the TranscribeView interface, employing a reference transcript from
+The above example shows a working example of the TranscribeView interface, employing a reference transcript from
 the <a href="https://groups.inf.ed.ac.uk/ami/icsi/">ICSI Corpus</a> for demonstration purposes. This interface is
 organized into distinct sections, each serving a specific purpose:
 
